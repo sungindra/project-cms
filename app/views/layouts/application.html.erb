@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CmsProject</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Sign Translate</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag    'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <%= render partial: "shared/navbar_top" %>
+      <%= render partial: "shared/header" %>
+    <% end %>
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Description -->
+          <%= render partial: "shared/notification" %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= yield(:script) %>
   </body>
 </html>
