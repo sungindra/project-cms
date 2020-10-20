@@ -24,7 +24,7 @@
                 table.table.table-striped.table-bordered
                   thead
                     tr
-                      th.center width="20%" = sort_link(@q, :title, "Bahasa")
+                      th.center width="20%" = sort_link(@q, :title, "Judul")
                       th.center width="20%" Konten
                       th.center width="15%" = sort_link(@q, :created_at, "Tanggal Dibuat")
                       th.center width="10%" Aksi
@@ -32,12 +32,13 @@
                     - @articles.each do |article|
                       tr
                         td = article.title
+                        td = article.content.truncate(100)
                         td = article.created_at.strftime("%d/%m/%Y")
                         td
                           .btn-group role="group"
                             = link_to edit_article_path(article), class: "btn btn-success" do
                               i.fa.fa-cog
-                            = link_to article_path(article), method: :delete, data: {confirm: "Anda yakin ingin menghapus #{sign.meaning} - #{sign.sign_type}?"}, class: "btn btn-danger" do
+                            = link_to article_path(article), method: :delete, data: {confirm: "Anda yakin ingin menghapus artikel #{article.title}?"}, class: "btn btn-danger" do
                               i.fa.fa-trash-o
 
               = pagy_bootstrap_nav(@pagy).html_safe

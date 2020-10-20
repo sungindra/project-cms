@@ -14,8 +14,6 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      @article.update(user_id: current_user.id)
-      @article.admin_submitted! if @article.may_admin_submitted?
       redirect_to articles_path, notice: 'Artikel berhasil dibuat'
     else
       render 'new'
