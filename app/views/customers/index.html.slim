@@ -1,0 +1,46 @@
+.content-body
+  section#configuration
+    .row
+      .col-md-12
+        .card
+          .card-header
+            h4.card-title Customer
+            .heading-elements
+              .pull-center
+                = link_to "Tambahkan customer baru", new_customer_path, class: "btn btn-primary"
+          .row
+            .card-block.card-dashboard
+              = search_form_for @q do |f|
+                .col-sm-11
+                  .input-group
+                    span.input-group-addon
+                      i.fa.fa-search.bg-secondary aria-hidden="true"
+                    = f.text_field :name_or_address_cont, :placeholder => "Cari customer dari nama atau alamat", class: "form-control"
+                .col-sm-1
+                  = f.submit "Cari", class: "btn btn-primary"
+          .card-body.collapse.in
+            .card-block.card-dashboard
+              .table-responsive
+                table.table.table-striped.table-bordered
+                  thead
+                    tr
+                      th.center width="20%" = sort_link(@q, :name, "Nama")
+                      th.center width="20%" Alamat
+                      th.center width="20%" Tempat Tinggal
+                      th.center width="15%" = sort_link(@q, :created_at, "Tanggal Dibuat")
+                      th.center width="10%" Aksi
+                  tbody
+                    - @customers.each do |customer|
+                      tr
+                        td = customer.name
+                        td = customer.address.truncate(100)
+                        td = customer.domicile.truncate(100)
+                        td = customer.created_at.strftime("%d/%m/%Y")
+                        td
+                          .btn-group role="group"
+                            = link_to edit_customer_path(customer), class: "btn btn-success" do
+                              i.fa.fa-cog
+                            = link_to customer_path(customer), method: :delete, data: {confirm: "Anda yakin ingin menghapus data #{customer.name}?"}, class: "btn btn-danger" do
+                              i.fa.fa-trash-o
+
+              = pagy_bootstrap_nav(@pagy).html_safe

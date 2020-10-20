@@ -1,16 +1,17 @@
 # == Schema Information
 #
-# Table name: articles
+# Table name: customers
 #
 #  id         :bigint           not null, primary key
-#  title      :string
-#  content    :string
+#  name       :string
+#  address    :string
+#  domicile   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 require 'test_helper'
 
-class ArticleTest < ActiveSupport::TestCase
+class CustomerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,0 +1,8 @@
+.card
+  .card-header
+    = simple_form_for @customer, url: url do |f|
+      .form-inputs
+        = f.input :name, label: 'Nama'
+        = f.input :address, label: 'Alamat', as: :text
+        = f.input :domicile, label: 'Tempat Tinggal', as: :text
+        = f.button :submit, class: "btn btn-primary btn-block"
